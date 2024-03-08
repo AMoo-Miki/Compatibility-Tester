@@ -51,7 +51,7 @@ const run = async () => {
 
   const { dest: testDir, versions: downloadedVersions } = await prepareTests();
   for (const key of Object.keys(downloadedVersions))
-    LOG_PROPS.version[key] = downloadedVersions[key];
+    LOG_PROPS.package[key] = downloadedVersions[key];
 
   if (params.has('--parallel')) {
     const timestamp = Date.now();
