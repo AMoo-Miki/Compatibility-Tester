@@ -58,8 +58,8 @@ const run = async () => {
     const ref = uuidv4();
     const builds = [];
 
-    await runParallelCypressTests(testDir, builds, timestamp, ref);
     await runParallelMochaTests(testDir, builds, timestamp, ref);
+    await runParallelCypressTests(testDir, builds, timestamp, ref);
 
     await waitForBuild('Parallel Tests', builds);
   } else {
