@@ -12,7 +12,7 @@ import {
 } from './lib/tests/index.js';
 import { waitForBuild } from './lib/codebuild.js';
 import { prepareOpenSearch, runOpenSearch } from './lib/opensearch.js';
-import { prepareDashboards, runDashboards } from './lib/dashboards.js';
+import { enrichNodeModules, prepareDashboards, runDashboards } from './lib/dashboards.js';
 import { killSubprocesses } from './lib/subprocess.js';
 import { _error, _info, _verbose2 } from './lib/logging.js';
 
@@ -79,6 +79,9 @@ const run = async () => {
     if (params.get('--test-type') === 'mocha') {
       killSubprocesses();
       await setTimeout(15000);
+      if (params.get('--group') === '0') {
+        await enrichNodeModules(testDir, osdDir);
+      }
       await handleMochaTests(testDir, osDir, osdDir);
     }
   }
